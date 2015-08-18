@@ -70,11 +70,19 @@ var work = {
 var projects = {
   "projects" : [
     {
-      "title" : "Sample Project 1",
+      "title" : "Bootstrap and Responsive Design",
       "dates" : "2015",
       "description" : "A prototype of a responsive web site utilizing the Bootstrap framework that shows a proficiency in responsive web site design.",
       "images" : [
-        "images/me.jpg"
+        "images/project1.jpg"
+      ]
+    },
+    {
+      "title" : "Javascript and JQuery",
+      "dates" : "2015",
+      "description" : "A resume generated using an HTML template populated using JavaScript/JQuery.",
+      "images" : [
+        "images/project2.jpg"
       ]
     }
   ]
@@ -122,7 +130,24 @@ function displayWork() {
   }
 }
 
+projects.display = function() {
+  for (project in projects.projects) {
+    $("#projects").append(HTMLprojectStart);
+
+    $(".project-entry:last").append(HTMLprojectTitle.replace("%data%", projects.projects[project].title));
+    $(".project-entry:last").append(HTMLprojectDates.replace("%data%", projects.projects[project].dates));
+    $(".project-entry:last").append(HTMLprojectDescription.replace("%data%", projects.projects[project].description));
+
+    if (projects.projects[project].images.length > 0) {
+      for (image in projects.projects[project].images) {
+        $(".project-entry:last").append(HTMLprojectImage.replace("%data%", projects.projects[project].images[image]));
+      }
+    }
+  }
+}
+
 displayWork();
+projects.display();
 
 $(document).click(function(loc) {
     var x = loc.pageX;
