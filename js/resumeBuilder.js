@@ -2,6 +2,7 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
+//create bio object
 var bio = {
   "name" : "Kevin Bottoms",
   "role" : "Web Developer",
@@ -12,18 +13,18 @@ var bio = {
     "twitter" : "NA",
     "location" : "Germany"
   },
-  "welcomeMessage" : "We got to move these color TV's",
+  "welcomeMessage" : "Please consider hiring me, a JavaScript ninja in training, to help you with your web needs.",
   "skills" : [
     "HTML5", "CSS3", "JavaScript", "Responsive Design"
   ],
   "bioPic" : "images/me.jpg"
 }
 
+//add display function to bio object
 bio.display = function() {
-  var formattedName = HTMLheaderName.replace("%data%", bio.name);
 
   $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
-  $("#header").prepend(formattedName);
+  $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
 
   $("#topContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
   $("#topContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
@@ -33,6 +34,7 @@ bio.display = function() {
   $("#header").append(HTMLbioPic.replace("%data%", bio.bioPic));
   $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
 
+  //checks for skills in bio object and displays if found
   if (bio.skills.length > 0) {
 
     $("#header").append(HTMLskillsStart);
@@ -48,6 +50,7 @@ bio.display = function() {
   }
 }
 
+//create education object
 var education = {
   "schools" : [
     {
@@ -55,7 +58,7 @@ var education = {
       "city" : "Wiesbaden",
       "degree" : "Masters",
       "major" : "Software Engineering",
-      "dates" : 2015,
+      "dates" : "2015",
       "url" : "http://umuc.edu"
     },
     {
@@ -63,7 +66,7 @@ var education = {
       "city" : "Wiesbaden",
       "degree" : "BS",
       "major" : "Digital Media and Web Technology",
-      "dates" : 2014,
+      "dates" : "2014",
       "url" : "http://umuc.edu"
     }
   ],
@@ -71,12 +74,13 @@ var education = {
     {
       "title" : "Frontend Web Developer Course",
       "school" : "Udacity",
-      "dates" : 2015,
+      "dates" : "2015 ",
       "url" : "http://udacity.com"
     }
   ]
 }
 
+//add display function to education object
 education.display = function() {
   for (studies in education.schools) {
     $("#education").append(HTMLschoolStart);
@@ -85,11 +89,11 @@ education.display = function() {
     $(".education-entry:last").append(HTMLschoolDegree.replace("%data%", education.schools[studies].degree));
     $(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[studies].dates));
     $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[studies].city));
-    $(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[studies].dates));
     $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[studies].major));
   }
 }
 
+//create work object
 var work = {
   "jobs" : [
     {
@@ -109,6 +113,7 @@ var work = {
   ]
 }
 
+//add display function to work object
 work.display = function() {
   for (job in work.jobs) {
     $("#workExperience").append(HTMLworkStart);
@@ -124,6 +129,7 @@ work.display = function() {
   }
 }
 
+//create project object
 var projects = {
   "projects" : [
     {
@@ -145,6 +151,7 @@ var projects = {
   ]
 }
 
+//add display function to project object
 projects.display = function() {
   for (project in projects.projects) {
     $("#projects").append(HTMLprojectStart);
@@ -152,6 +159,7 @@ projects.display = function() {
     $(".project-entry:last").append(HTMLprojectDates.replace("%data%", projects.projects[project].dates));
     $(".project-entry:last").append(HTMLprojectDescription.replace("%data%", projects.projects[project].description));
 
+    //checks for images in the project object and displays them if found
     if (projects.projects[project].images.length > 0) {
       for (image in projects.projects[project].images) {
         $(".project-entry:last").append(HTMLprojectImage.replace("%data%", projects.projects[project].images[image]));
@@ -160,13 +168,16 @@ projects.display = function() {
   }
 }
 
+//invoke functions to append page data to html
 bio.display();
 work.display();
 projects.display();
 education.display();
 
+//required to add google map to page
 $("#mapDiv").append(googleMap);
 
+//tracks mouse clicks and shows them in console
 $(document).click(function(loc) {
     var x = loc.pageX;
     var y = loc.pageY;
