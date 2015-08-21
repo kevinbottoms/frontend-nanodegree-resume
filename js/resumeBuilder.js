@@ -11,14 +11,14 @@ var bio = {
     "email" : "webdev@kevinbottoms.com",
     "github" : "kevinbottoms",
     "twitter" : "NA",
-    "location" : "Germany"
+    "location" : "Wiesbaden"
   },
   "welcomeMessage" : "Please consider hiring me, a JavaScript ninja in training, to help you with your web needs.",
   "skills" : [
     "HTML5", "CSS3", "JavaScript", "Responsive Design"
   ],
   "bioPic" : "images/me.jpg"
-}
+};
 
 //add display function to bio object
 bio.display = function() {
@@ -26,10 +26,10 @@ bio.display = function() {
   $("#header").prepend(HTMLheaderRole.replace("%data%", bio.role));
   $("#header").prepend(HTMLheaderName.replace("%data%", bio.name));
 
-  $("#topContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
-  $("#topContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
-  $("#topContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
-  $("#topContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
+  $("#topContacts, #footerContacts").append(HTMLmobile.replace("%data%", bio.contacts.mobile));
+  $("#topContacts, #footerContacts").append(HTMLemail.replace("%data%", bio.contacts.email));
+  $("#topContacts, #footerContacts").append(HTMLgithub.replace("%data%", bio.contacts.github));
+  $("#topContacts, #footerContacts").append(HTMLlocation.replace("%data%", bio.contacts.location));
 
   $("#header").append(HTMLbioPic.replace("%data%", bio.bioPic));
   $("#header").append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
@@ -38,24 +38,19 @@ bio.display = function() {
   if (bio.skills.length > 0) {
 
     $("#header").append(HTMLskillsStart);
-
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[1]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[2]);
-    $("#skills").append(formattedSkill);
-    formattedSkill = HTMLskills.replace("%data%", bio.skills[3]);
-    $("#skills").append(formattedSkill);
+    for (var i in bio.skills) {
+      var formattedSkills = HTMLskills.replace("%data%", bio.skills[i]);
+      $("#skills").append(formattedSkills);
+    }
   }
-}
+};
 
 //create education object
 var education = {
   "schools" : [
     {
       "name" : "University of Maryland University College",
-      "city" : "Wiesbaden",
+      "location" : "Wiesbaden",
       "degree" : "Masters",
       "major" : "Software Engineering",
       "dates" : "2015",
@@ -63,7 +58,7 @@ var education = {
     },
     {
       "name" : "University of Maryland University College",
-      "city" : "Wiesbaden",
+      "location" : "Wiesbaden",
       "degree" : "BS",
       "major" : "Digital Media and Web Technology",
       "dates" : "2014",
@@ -78,7 +73,7 @@ var education = {
       "url" : "http://udacity.com"
     }
   ]
-}
+};
 
 //add display function to education object
 education.display = function() {
@@ -88,10 +83,10 @@ education.display = function() {
     $(".education-entry:last").append(HTMLschoolName.replace("%data%", education.schools[studies].name));
     $(".education-entry:last").append(HTMLschoolDegree.replace("%data%", education.schools[studies].degree));
     $(".education-entry:last").append(HTMLschoolDates.replace("%data%", education.schools[studies].dates));
-    $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[studies].city));
+    $(".education-entry:last").append(HTMLschoolLocation.replace("%data%", education.schools[studies].location));
     $(".education-entry:last").append(HTMLschoolMajor.replace("%data%", education.schools[studies].major));
   }
-}
+};
 
 //create work object
 var work = {
@@ -111,11 +106,11 @@ var work = {
       "description" : "Responsible for the recording and tracking of financial transactions for multiple exchange facilities. Handled sensitive data and ensured financial policies were adhered to while also inspecting possible fraud, waste and abuse."
     }
   ]
-}
+};
 
 //add display function to work object
 work.display = function() {
-  for (job in work.jobs) {
+  for (var job in work.jobs) {
     $("#workExperience").append(HTMLworkStart);
 
     var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -127,7 +122,7 @@ work.display = function() {
     $(".work-entry:last").append(HTMLworkLocation.replace("%data%", work.jobs[job].location));
     $(".work-entry:last").append(HTMLworkDescription.replace("%data%", work.jobs[job].description));
   }
-}
+};
 
 //create project object
 var projects = {
@@ -149,7 +144,7 @@ var projects = {
       ]
     }
   ]
-}
+};
 
 //add display function to project object
 projects.display = function() {
@@ -166,7 +161,7 @@ projects.display = function() {
       }
     }
   }
-}
+};
 
 //invoke functions to append page data to html
 bio.display();
@@ -182,4 +177,4 @@ $(document).click(function(loc) {
     var x = loc.pageX;
     var y = loc.pageY;
   logClicks(x, y);
-})
+});
